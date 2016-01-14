@@ -1,0 +1,20 @@
+{
+  "name": "web-sdk-generator",
+  "description": "Boundless Web SDK application generator",
+  "version": "0.1.0",
+  "author": "Boundless Spatial, Inc.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bartvde/sdk-generator.git"
+  },
+  "dependencies": {
+    "commander": "2.7.1",
+    "mkdirp": "0.5.1",
+    "sorted-object": "1.0.0"
+  },
+  "main": "bin/web-sdk",
+  "bin": {
+    "web-sdk": "./bin/web-sdk"
+  }
+}

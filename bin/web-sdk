@@ -1,0 +1,167 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+var readline = require('readline');
+var path = require('path');
+var sortedObject = require('sorted-object');
+
+var pkg = require('../package.json');
+var version = pkg.version;
+
+program
+  .version(version)
+  .usage('[options] [dir]')
+  .option('-t, --tabs', 'add support for using tabs')
+  .option('-b, --buttons', 'add support for using buttons')
+  .option('-i, --icons', 'add support for using icons')
+  .option('-f, --force', 'force on non-empty directory')
+  .parse(process.argv);
+
+main();
+
+function mkdir(path, fn) {
+  mkdirp(path, 0755, function(err){
+    if (err) throw err;
+    console.log('   \033[36mcreate\033[0m : ' + path);
+    fn && fn();
+  });
+}
+
+function write(path, str, mode) {
+  fs.writeFileSync(path, str, { mode: mode || 0666 });
+  console.log('   \x1b[36mcreate\x1b[0m : ' + path);
+}
+
+function loadTemplate(name) {
+  return fs.readFileSync(path.join(__dirname, '..', 'templates', name), 'utf-8');
+}
+
+function createApplication(app_name, path) {
+  var wait = 1;
+
+  console.log();
+  function complete() {
+    if (--wait) return;
+    var prompt = '$';
+    console.log();
+    console.log('   install dependencies:');
+    console.log('     %s cd %s && npm install --registry https://repo.boundlessgeo.com/api/npm/npmall', prompt, path);
+    console.log();
+    console.log('   run the app:');
+    console.log('     %s npm start', prompt);
+    console.log();
+  }
+
+  var app = loadTemplate('js/app.jsx');
+  var css = loadTemplate('css/app.css');
+  var html = loadTemplate('html/index.html');
+  var createbuild = loadTemplate('js/createbuild.js');
+  var debugserver = loadTemplate('js/debug-server.js');
+
+  mkdir(path, function() {
+    write(path + '/app.jsx', app);
+    write(path + '/app.css', css);
+    write(path + '/createbuild.js', createbuild);
+    write(path + '/debug-server.js', debugserver);
+    write(path + '/index.html', html);
+    // package.json
+    var pkg = {
+      name: app_name,
+      version: '0.0.0',
+      scripts: {
+        'createdir': 'node createbuild.js',
+        'start:debug': 'node debug-server.js',
+        'start': 'node_modules/.bin/npm-run-all --parallel createdir start:debug',
+        'build:js': 'node_modules/.bin/browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
+        'build': 'node_modules/.bin/npm-run-all --parallel createdir build:js'
+      },
+      dependencies: {
+        'boundless-sdk': '*',
+        'react': '0.14.3',
+        'react-dom': '0.14.3',
+        'openlayers': '3.12.1',
+        'react-intl': '2.0.0-beta-2'
+      },
+      devDependencies: {
+        'sdk-tools': '*',
+        'babel-plugin-react-intl': '1.0.0-beta-5',
+        'babelify': '^6.0.2',
+        'browserify': '^11.2.0',
+        'cssify': '^0.8.0',
+        'envify': '^3.4.0',
+        'fs-extra': '0.26.2',
+        'minifyify': '^7.1.0',
+        'npm-run-all': '1.3.1',
+        'through': '^2.3.8',
+        'watchify': '^3.2.0'
+      },
+      'browserify': {
+        'transform': [
+          'cssify',
+          'babelify'
+        ]
+      }
+    }
+    if (program.tabs) {
+      pkg.dependencies['pui-react-tabs'] = '3.0.0-alpha.2';
+    }
+    if (program.buttons) {
+      pkg.dependencies['pui-react-buttons'] = '3.0.0-alpha.2';
+    }
+    if (program.icons) {
+      pkg.dependencies['pui-react-iconography'] = '3.0.0-alpha.2';
+    }
+    // sort dependencies like npm(1)
+    pkg.dependencies = sortedObject(pkg.dependencies);
+
+    // write files
+    write(path + '/package.json', JSON.stringify(pkg, null, 2));
+
+    complete();
+  });
+}
+
+function emptyDirectory(path, fn) {
+  fs.readdir(path, function(err, files){
+    if (err && 'ENOENT' != err.code) throw err;
+    fn(!files || !files.length);
+  });
+}
+
+function confirm(msg, callback) {
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.question(msg, function (input) {
+    rl.close();
+    callback(/^y|yes|ok|true$/i.test(input));
+  });
+}
+
+function main() {
+  var destinationPath = program.args.shift() || '.';
+
+  // App name
+  var appName = path.basename(path.resolve(destinationPath));
+
+  // Generate application
+  emptyDirectory(destinationPath, function (empty) {
+    if (empty || program.force) {
+      createApplication(appName, destinationPath);
+    } else {
+      confirm('destination is not empty, continue? [y/N] ', function (ok) {
+        if (ok) {
+          process.stdin.destroy();
+          createApplication(appName, destinationPath);
+        } else {
+          console.error('aborting');
+          exit(1);
+        }
+      });
+    }
+  });
+}
