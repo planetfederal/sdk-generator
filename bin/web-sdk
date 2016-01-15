@@ -13,9 +13,6 @@ var version = pkg.version;
 program
   .version(version)
   .usage('[options] [dir]')
-  .option('-t, --tabs', 'add support for using tabs')
-  .option('-b, --buttons', 'add support for using buttons')
-  .option('-i, --icons', 'add support for using icons')
   .option('-f, --force', 'force on non-empty directory')
   .parse(process.argv);
 
@@ -103,15 +100,6 @@ function createApplication(app_name, path) {
           'babelify'
         ]
       }
-    }
-    if (program.tabs) {
-      pkg.dependencies['pui-react-tabs'] = '3.0.0-alpha.2';
-    }
-    if (program.buttons) {
-      pkg.dependencies['pui-react-buttons'] = '3.0.0-alpha.2';
-    }
-    if (program.icons) {
-      pkg.dependencies['pui-react-iconography'] = '3.0.0-alpha.2';
     }
     // sort dependencies like npm(1)
     pkg.dependencies = sortedObject(pkg.dependencies);
