@@ -147,7 +147,7 @@ function main() {
           createApplication(appName, destinationPath);
         } else {
           console.error('aborting');
-          exit(1);
+          process.exit(1);
         }
       });
     }
