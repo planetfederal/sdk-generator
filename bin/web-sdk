@@ -55,12 +55,14 @@ function createApplication(app_name, path) {
   var css = loadTemplate('css/app.css');
   var html = loadTemplate('html/index.html');
   var createbuild = loadTemplate('js/createbuild.js');
+  var createpackage = loadTemplate('js/createpackage.js');
   var debugserver = loadTemplate('js/debug-server.js');
 
   mkdir(path, function() {
     write(path + '/app.jsx', app);
     write(path + '/app.css', css);
     write(path + '/createbuild.js', createbuild);
+    write(path + '/createpackage.js', createpackage);
     write(path + '/debug-server.js', debugserver);
     write(path + '/index.html', html);
     // package.json
