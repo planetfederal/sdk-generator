@@ -14,6 +14,7 @@ program
   .version(version)
   .usage('[options] [dir]')
   .option('-f, --force', 'force on non-empty directory')
+  .option('-d, --debug', 'output more debug info')
   .parse(process.argv);
 
 main();
@@ -26,8 +27,14 @@ function mkdir(path, fn) {
   });
 }
 
-function write(path, str, mode) {
-  fs.writeFileSync(path, str, { mode: mode || 0666 });
+function write(path, str, mode, flag) {
+  try {
+    fs.writeFileSync(path, str, { flag: flag, mode: mode || 0666 });
+  } catch(e) {
+    if (program.debug) {
+      console.log(e);
+    }
+  }
   console.log('   \x1b[36mcreate\x1b[0m : ' + path);
 }
 
@@ -59,12 +66,15 @@ function createApplication(app_name, path) {
   var debugserver = loadTemplate('js/debug-server.js');
 
   mkdir(path, function() {
-    write(path + '/app.jsx', app);
-    write(path + '/app.css', css);
+    write(path + '/app.jsx', app, null, 'wx');
+    var appContent = fs.readFileSync(path + '/app.jsx', 'utf-8');
+    console.log(appContent.indexOf('pui-react-buttons'));
+    console.log(appContent.indexOf('pui-react-iconography'));
+    write(path + '/app.css', css, null, 'wx');
     write(path + '/createbuild.js', createbuild);
     write(path + '/createpackage.js', createpackage);
     write(path + '/debug-server.js', debugserver);
-    write(path + '/index.html', html);
+    write(path + '/index.html', html, null, 'wx');
     // package.json
     var pkg = {
       name: app_name,
@@ -107,6 +117,12 @@ function createApplication(app_name, path) {
           'babelify'
         ]
       }
+    }
+    if (appContent.indexOf('pui-react-buttons') !== -1) {
+      pkg.dependencies['pui-react-buttons'] = '3.2.0';
+    }
+    if (appContent.indexOf('pui-react-iconography') !== -1) {
+      pkg.dependencies['pui-react-iconography'] = '3.2.0';
     }
     // sort dependencies like npm(1)
     pkg.dependencies = sortedObject(pkg.dependencies);
