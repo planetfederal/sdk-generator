@@ -1,7 +1,7 @@
 ## Installation
 
 ```sh
-$ npm install -g web-sdk-generator
+$ npm install --registry https://repo.boundlessgeo.com/api/npm/npmall -g web-sdk-generator
 ```
 
 ## Quick Start
