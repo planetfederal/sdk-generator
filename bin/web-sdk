@@ -68,8 +68,6 @@ function createApplication(app_name, path) {
   mkdir(path, function() {
     write(path + '/app.jsx', app, null, 'wx');
     var appContent = fs.readFileSync(path + '/app.jsx', 'utf-8');
-    console.log(appContent.indexOf('pui-react-buttons'));
-    console.log(appContent.indexOf('pui-react-iconography'));
     write(path + '/app.css', css, null, 'wx');
     write(path + '/createbuild.js', createbuild);
     write(path + '/createpackage.js', createpackage);
