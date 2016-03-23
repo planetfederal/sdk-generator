@@ -92,7 +92,7 @@ function createApplication(app_name, path) {
         'boundless-sdk': '*',
         'react': '0.14.7',
         'react-dom': '0.14.7',
-        'openlayers': '3.12.1',
+        'openlayers': '3.13.1',
         'react-intl': '2.0.0-rc-1'
       },
       devDependencies: {
