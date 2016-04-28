@@ -90,8 +90,9 @@ function createApplication(app_name, path) {
         'boundless-sdk': '*',
         'react': '0.14.7',
         'react-dom': '0.14.7',
-        'openlayers': '3.13.1',
-        'react-intl': '2.0.0-rc-1'
+        'openlayers': '~3.15.0',
+        'react-intl': '2.0.0-rc-1',
+        'react-tap-event-plugin': '^0.2.2'
       },
       devDependencies: {
         'archiver': '0.21.0',
@@ -116,11 +117,8 @@ function createApplication(app_name, path) {
         ]
       }
     }
-    if (appContent.indexOf('pui-react-buttons') !== -1) {
-      pkg.dependencies['pui-react-buttons'] = '3.2.0';
-    }
-    if (appContent.indexOf('pui-react-iconography') !== -1) {
-      pkg.dependencies['pui-react-iconography'] = '3.2.0';
+    if (appContent.indexOf('material-ui') !== -1) {
+      pkg.dependencies['material-ui'] = '^0.14.4';
     }
     // sort dependencies like npm(1)
     pkg.dependencies = sortedObject(pkg.dependencies);

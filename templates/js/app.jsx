@@ -4,8 +4,15 @@ import ol from 'openlayers';
 import {addLocaleData, IntlProvider} from 'react-intl';
 import App from './node_modules/boundless-sdk/js/components/App.js';
 import LayerList from './node_modules/boundless-sdk/js/components/LayerList.jsx';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import enLocaleData from './node_modules/react-intl/locale-data/en.js';
 import enMessages from './node_modules/boundless-sdk/locale/en.js';
+
+// Needed for onTouchTap
+// Can go away when react 1.0 release
+// Check this repo:
+// https://github.com/zilverline/react-tap-event-plugin
+injectTapEventPlugin();
 
 addLocaleData(
   enLocaleData
