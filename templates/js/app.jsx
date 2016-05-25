@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 import {addLocaleData, IntlProvider} from 'react-intl';
-import App from 'boundless-sdk/js/components/App.js';
+import MapPanel from 'boundless-sdk/js/components/MapPanel.jsx';
 import LayerList from 'boundless-sdk/js/components/LayerList.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import enLocaleData from 'react-intl/locale-data/en.js';
@@ -44,15 +44,15 @@ var map = new ol.Map({
   })
 });
 
-class MyApp extends App {
+class MyApp extends React.Component {
   render() {
     return (
       <article>
-        <div ref='map' id='map'></div>
+        <MapPanel id='map' map={map} />
         <div><LayerList map={map} /></div>
       </article>
     );
   }
 }
 
-ReactDOM.render(<IntlProvider locale='en' messages={enMessages}><MyApp map={map} /></IntlProvider>, document.getElementById('main'));
+ReactDOM.render(<IntlProvider locale='en' messages={enMessages}><MyApp /></IntlProvider>, document.getElementById('main'));
