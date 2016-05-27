@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 import {addLocaleData, IntlProvider} from 'react-intl';
+import Zoom from 'boundless-sdk/js/components/Zoom.jsx';
 import MapPanel from 'boundless-sdk/js/components/MapPanel.jsx';
 import LayerList from 'boundless-sdk/js/components/LayerList.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -19,6 +20,7 @@ addLocaleData(
 );
 
 var map = new ol.Map({
+  controls: [new ol.control.Attribution({collapsible: false})],
   layers: [
     new ol.layer.Group({
       type: 'base-group',
@@ -47,10 +49,11 @@ var map = new ol.Map({
 class MyApp extends React.Component {
   render() {
     return (
-      <article>
+       <div id='content'>
         <MapPanel id='map' map={map} />
         <div><LayerList map={map} /></div>
-      </article>
+        <div id='zoom-buttons'><Zoom map={map} /></div>
+      </div>
     );
   }
 }
