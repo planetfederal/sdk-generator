@@ -51,7 +51,7 @@ function createApplication(app_name, path) {
     var prompt = '$';
     console.log();
     console.log('   install dependencies:');
-    console.log('     %s cd %s && npm install --registry https://repo.boundlessgeo.com/api/npm/npmall', prompt, path);
+    console.log('     %s cd %s && npm install --registry https://npm.boundlessgeo.com', prompt, path);
     console.log();
     console.log('   run the app:');
     console.log('     %s npm start', prompt);
