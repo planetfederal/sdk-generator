@@ -1,11 +1,11 @@
 {
   "name": "web-sdk-generator",
   "description": "Boundless Web SDK application generator",
-  "version": "0.1.7",
+  "version": "0.9.0",
   "author": "Boundless Spatial, Inc.",
   "license": "Apache-2.0",
   "publishConfig": {
-    "registry": "https://repo.boundlessgeo.com/api/npm/npmjs"
+    "registry": "https://npm.boundlessgeo.com/"
   },
   "repository": {
     "type": "git",
