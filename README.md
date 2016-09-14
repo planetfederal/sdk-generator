@@ -1,7 +1,7 @@
 ## Installation
 
 ```sh
-$ npm install --registry https://repo.boundlessgeo.com/api/npm/npmall -g web-sdk-generator
+$ npm install -g boundless-web-sdk-generator
 ```
 
 ## Quick Start
@@ -17,7 +17,7 @@ $ web-sdk /tmp/foo && cd /tmp/foo
 Install dependencies:
 
 ```bash
-$ npm install --registry https://repo.boundlessgeo.com/api/npm/npmall
+$ npm install
 ```
 
 Rock and Roll
