@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 import {addLocaleData, IntlProvider} from 'react-intl';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Zoom from 'boundless-sdk/js/components/Zoom.jsx';
 import MapPanel from 'boundless-sdk/js/components/MapPanel.jsx';
 import LayerList from 'boundless-sdk/js/components/LayerList.jsx';
@@ -54,6 +55,11 @@ var map = new ol.Map({
 });
 
 class MyApp extends React.Component {
+  getChildContext() {
+    return {
+      muiTheme: getMuiTheme()
+    };
+  }
   render() {
     return (
        <div id='content'>
@@ -64,5 +70,9 @@ class MyApp extends React.Component {
     );
   }
 }
+
+MyApp.childContextTypes = {
+  muiTheme: React.PropTypes.object
+};
 
 ReactDOM.render(<IntlProvider locale='en' messages={enMessages}><MyApp /></IntlProvider>, document.getElementById('main'));
