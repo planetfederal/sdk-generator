@@ -59,6 +59,7 @@ function createApplication(app_name, path) {
   }
 
   var app = loadTemplate('js/app.jsx');
+  var proxy = loadTemplate('json/proxy-config.json');
   var css = loadTemplate('css/app.css');
   var html = loadTemplate('html/index.html');
   var createbuild = loadTemplate('js/createbuild.js');
@@ -73,6 +74,7 @@ function createApplication(app_name, path) {
     write(path + '/createpackage.js', createpackage);
     write(path + '/debug-server.js', debugserver);
     write(path + '/index.html', html, null, 'wx');
+    write(path + '/proxy-config.json', proxy);
     // package.json
     var pkg = {
       name: app_name,
@@ -81,6 +83,7 @@ function createApplication(app_name, path) {
         'createdir': 'node createbuild.js',
         'start:debug': 'node debug-server.js',
         'start': 'node_modules/.bin/npm-run-all createdir start:debug',
+        'start:proxy': 'node_modules/.bin/json-http-proxy -p 4000',
         'build:js': 'node_modules/.bin/browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
         'build': 'node_modules/.bin/npm-run-all createdir build:js',
         'createzip': 'node createpackage.js',
@@ -103,6 +106,7 @@ function createApplication(app_name, path) {
         'cssify': '^0.8.0',
         'envify': '^3.4.0',
         'fs-extra': '0.26.2',
+        'json-http-proxy': '^1.0.0-BETA-3',
         'minifyify': '^7.1.0',
         'npm-run-all': '1.3.1',
         'readline': '1.3.0',
