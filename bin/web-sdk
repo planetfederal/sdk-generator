@@ -95,12 +95,12 @@ function createApplication(app_name, path) {
         'react': '^15.3.2',
         'react-dom': '^15.3.2',
         'openlayers': '3.19.0',
-        'react-intl': '2.0.0-rc-1',
+        'react-intl': '^2.1.5',
         'react-tap-event-plugin': '^1.0.0'
       },
       devDependencies: {
         'archiver': '0.21.0',
-        'babel-plugin-react-intl': '1.0.0-beta-5',
+        'babel-plugin-react-intl': '1.0.0',
         'babelify': '^6.0.2',
         'browserify': '^11.2.0',
         'cssify': '^0.8.0',
