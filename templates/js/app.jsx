@@ -64,7 +64,7 @@ class MyApp extends React.Component {
     return (
        <div id='content'>
         <MapPanel id='map' map={map} />
-        <div><LayerList map={map} /></div>
+        <div><LayerList collapsible={false} map={map} /></div>
         <div id='zoom-buttons'><Zoom map={map} /></div>
       </div>
     );
