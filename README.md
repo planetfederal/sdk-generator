@@ -26,6 +26,13 @@ Rock and Roll
 $ npm start
 ```
 
+Create a package to deploy
+
+```bash
+$ npm run build
+$ npm run createzip -- --output-file=/tmp/mywebapp.zip
+```
+
 ## Command Line Options
 
 This generator can also be further configured with the following command line flags.
