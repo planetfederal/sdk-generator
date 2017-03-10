@@ -80,12 +80,11 @@ function createApplication(app_name, path) {
       name: app_name,
       version: '0.0.0',
       scripts: {
-        'createdir': 'node createbuild.js',
-        'start:debug': 'node debug-server.js',
-        'start': 'node_modules/.bin/npm-run-all createdir start:debug',
-        'start:proxy': 'node_modules/.bin/json-http-proxy -p 4000',
-        'build:js': 'node_modules/.bin/browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
-        'build': 'node_modules/.bin/npm-run-all createdir build:js',
+        'postinstall': 'node createbuild.js',
+        'start': 'node debug-server.js',
+        'start:proxy': 'json-http-proxy -p 4000',
+        'build:js': 'browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
+        'build': 'npm-run-all createdir build:js',
         'createzip': 'node createpackage.js'
       },
       dependencies: {
