@@ -1,7 +1,7 @@
 {
   "name": "boundless-web-sdk-generator",
   "description": "Boundless Web SDK application generator",
-  "version": "0.10.5",
+  "version": "0.10.6",
   "author": "Boundless Spatial, Inc.",
   "license": "Apache-2.0",
   "repository": {

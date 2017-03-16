@@ -80,7 +80,7 @@ function createApplication(app_name, path) {
       name: app_name,
       version: '0.0.0',
       scripts: {
-        'postinstall': 'node createbuild.js',
+        'postinstall': 'mkdir build',
         'start': 'node debug-server.js',
         'start:proxy': 'json-http-proxy -p 4000',
         'build:js': 'browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
