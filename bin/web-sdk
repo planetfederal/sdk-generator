@@ -80,10 +80,11 @@ function createApplication(app_name, path) {
       name: app_name,
       version: '0.0.0',
       scripts: {
-        'postinstall': 'mkdir -p build',
+        'createdir': 'node createbuild.js',
         'start': 'node debug-server.js',
         'start:proxy': 'json-http-proxy -p 4000',
-        'build:js': 'browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
+        'build:js:compact': 'browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
+        'build:js': 'browserify app.jsx | uglifyjs2 --output build/app.js',
         'build': 'npm-run-all createdir build:js',
         'createzip': 'node createpackage.js'
       },
@@ -110,6 +111,7 @@ function createApplication(app_name, path) {
         'replacestream': '4.0.0',
         'boundless-sdk-tools': '^0.10.0',
         'through': '^2.3.8',
+        'uglify-js2': '^2.1.11',
         'watchify': '^3.2.0'
       },
       'browserify': {
