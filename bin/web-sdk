@@ -89,7 +89,7 @@ function createApplication(app_name, path) {
         'createzip': 'node createpackage.js'
       },
       dependencies: {
-        'boundless-sdk': '0.10.25',
+        'boundless-sdk': '0.10.31',
         'material-ui': '0.16.4',
         'react': '15.3.2',
         'react-dom': '15.3.2',
