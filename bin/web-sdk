@@ -9,9 +9,10 @@ var sortedObject = require('sorted-object');
 
 var pkg = require('../package.json');
 var version = pkg.version;
+var sdkversion = '0.10.31';
 
 program
-  .version(version)
+  .version(JSON.stringify({version: version, 'boundless-sdk': sdkversion}))
   .usage('[options] [dir]')
   .option('-f, --force', 'force on non-empty directory')
   .option('-d, --debug', 'output more debug info')
@@ -89,7 +90,7 @@ function createApplication(app_name, path) {
         'createzip': 'node createpackage.js'
       },
       dependencies: {
-        'boundless-sdk': '0.10.31',
+        'boundless-sdk': sdkversion,
         'material-ui': '0.16.4',
         'react': '15.3.2',
         'react-dom': '15.3.2',
