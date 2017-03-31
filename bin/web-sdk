@@ -9,7 +9,7 @@ var sortedObject = require('sorted-object');
 
 var pkg = require('../package.json');
 var version = pkg.version;
-var sdkversion = '0.10.31';
+var sdkversion = '0.10.32';
 
 program
   .version(JSON.stringify({version: version, 'boundless-sdk': sdkversion}))
