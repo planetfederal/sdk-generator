@@ -86,7 +86,7 @@ function createApplication(app_name, path) {
         'start': 'npm-run-all createdir start:debug',
         'start:proxy': 'json-http-proxy -p 4000',
         'build:js:compact': 'browserify -g [envify --NODE_ENV production] -p [minifyify --no-map --exclude node_modules/openlayers/dist/ol.js] app.jsx -o build/app.js',
-        'build:js': 'browserify app.jsx | uglifyjs --output build/app.js',
+        'build:js': 'browserify app.jsx | uglifyjs --beautify max-line-len=10000000 --output build/app.js',
         'build': 'npm-run-all createdir build:js',
         'createzip': 'node createpackage.js'
       },
