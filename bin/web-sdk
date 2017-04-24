@@ -9,7 +9,7 @@ var sortedObject = require('sorted-object');
 
 var pkg = require('../package.json');
 var version = pkg.version;
-var sdkversion = '0.10.32';
+var sdkversion = '0.10.35';
 
 program
   .version(JSON.stringify({version: version, 'boundless-sdk': sdkversion}))
@@ -91,7 +91,7 @@ function createApplication(app_name, path) {
         'createzip': 'node createpackage.js'
       },
       dependencies: {
-        'boundless-sdk': sdkversion,
+        '@boundlessgeo/sdk': sdkversion,
         'material-ui': '0.16.4',
         'react': '15.3.2',
         'react-dom': '15.3.2',
@@ -111,7 +111,7 @@ function createApplication(app_name, path) {
         'minifyify': '^7.1.0',
         'npm-run-all': '1.3.1',
         'replacestream': '4.0.0',
-        'boundless-sdk-tools': '^0.10.0',
+        '@boundlessgeo/sdk-tools': '^0.10.0',
         'through': '^2.3.8',
         'uglify-js': '^2.8.13',
         'watchify': '^3.2.0'
