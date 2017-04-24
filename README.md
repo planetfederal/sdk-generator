@@ -1,7 +1,7 @@
 ## Installation
 
 ```sh
-$ npm install -g boundless-web-sdk-generator
+$ npm install -g @boundlessgeo/sdk-generator
 ```
 
 ## Quick Start
