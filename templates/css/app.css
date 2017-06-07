@@ -40,7 +40,7 @@ body {
   right: 20px;
 }
 .layerlistbutton {
-  position: absolute;
+  position: absolute !important;
   right: 0px;
   top: 0px;
 }
