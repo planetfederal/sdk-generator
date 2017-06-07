@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const path = require('path');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
+const ArchivePlugin = require('webpack-archive-plugin');
 
-const config = {
+let config = {
   entry: {
     main: [
       './src/app/app.js',
@@ -49,4 +50,9 @@ const config = {
   },
 };
 
-module.exports = config;
+module.exports = function(env) {
+  if (env['output-file']) {
+    config.plugins.push(new ArchivePlugin({output: env['output-file'].split('.')[0], format: 'zip'}));
+  }
+  return config;
+}
