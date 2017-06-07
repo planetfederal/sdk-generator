@@ -73,6 +73,7 @@ function createApplication(app_name, path) {
   var css = loadTemplate('css/app.css');
   var html = loadTemplate('html/index.html');
   var webpackDev = loadTemplate('js/webpack-dev-server.config.js');
+  var webpack = loadTemplate('js/webpack-production.config.js');
 
   mkdir(path, function() {
     write(path + '/src/app/app.js', app, null, 'wx');
@@ -80,6 +81,7 @@ function createApplication(app_name, path) {
     write(path + '/src/www/app.css', css, null, 'wx');
     write(path + '/src/www/index.html', html, null, 'wx');
     write(path + '/webpack-dev-server.config.js', webpackDev, null, 'wx');
+    write(path + '/webpack-production.config.js', webpack, null, 'wx');
     // package.json
     var pkg = {
       name: app_name,
