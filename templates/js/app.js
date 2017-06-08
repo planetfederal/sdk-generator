@@ -9,6 +9,7 @@ import LayerList from '@boundlessgeo/sdk/components/LayerList';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import enLocaleData from 'react-intl/locale-data/en';
 import enMessages from '@boundlessgeo/sdk/locale/en';
+import '@boundlessgeo/sdk/dist/css/components.css';
 
 // Needed for onTouchTap
 // Can go away when react 1.0 release

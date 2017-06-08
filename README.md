@@ -1,7 +1,7 @@
 ## Installation
 
 ```sh
-$ npm install -g @boundlessgeo/sdk-generator
+$ npm install -g @boundlessgeo/sdk-generator-webpack
 ```
 
 ## Quick Start
@@ -20,7 +20,7 @@ Install dependencies:
 $ npm i
 ```
 
-Rock and Roll
+Starts up webpack dev server on port 3000
 
 ```bash
 $ npm start
@@ -29,8 +29,7 @@ $ npm start
 Create a package to deploy
 
 ```bash
-$ npm run build
-$ npm run createzip -- --output-file=/tmp/mywebapp.zip
+$ npm run build -- --env.output-file=/tmp/mywebapp.zip
 ```
 
 ## Command Line Options
