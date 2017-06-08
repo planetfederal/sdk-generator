@@ -1,7 +1,7 @@
 {
   "name": "@boundlessgeo/sdk-generator-webpack",
   "description": "Boundless Web SDK application generator (webpack2)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Boundless Spatial, Inc.",
   "license": "Apache-2.0",
   "repository": {
