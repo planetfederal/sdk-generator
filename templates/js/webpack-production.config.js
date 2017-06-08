@@ -51,7 +51,7 @@ let config = {
 };
 
 module.exports = function(env) {
-  if (env['output-file']) {
+  if (env && env['output-file']) {
     config.plugins.push(new ArchivePlugin({output: env['output-file'].split('.')[0], format: 'zip'}));
   }
   return config;
